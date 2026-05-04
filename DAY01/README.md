@@ -10,3 +10,7 @@ Implemented AND, OR, NOT gates using Verilog.
 
 ## Simulation
 All input combinations tested successfully.
+
+## Tools Used
+- EDA Playground
+- Icarus Verilog
