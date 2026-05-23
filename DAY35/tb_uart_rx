@@ -1,0 +1,51 @@
+`timescale 1ns/1ps
+
+module tb_uart_rx;
+
+reg clk;
+reg rx;
+
+wire [7:0] data_out;
+
+uart_rx uut(
+    .clk(clk),
+    .rx(rx),
+    .data_out(data_out)
+);
+
+always #5 clk = ~clk;
+
+initial begin
+
+    $dumpfile("wave.vcd");
+    $dumpvars(0, tb_uart_rx);
+
+    clk = 0;
+
+    rx = 1;
+
+    #10;
+
+    // Start Bit
+    rx = 0; #10;
+
+    // Data bits for 10101010
+    rx = 0; #10;
+    rx = 1; #10;
+    rx = 0; #10;
+    rx = 1; #10;
+    rx = 0; #10;
+    rx = 1; #10;
+    rx = 0; #10;
+    rx = 1; #10;
+
+    // Stop Bit
+    rx = 1; #10;
+
+    #20;
+
+    $finish;
+
+end
+
+endmodule
